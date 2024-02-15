@@ -1,7 +1,7 @@
 <p align="center">
   <img src="https://github.com/thompsonemerson/thompsonemerson/raw/master/cover-thompson.png" />
 </p>
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&random=false&width=435&lines=ADHAM;+FRONTEND+DEVELOPER)](https://git.io/typing-svg)
+
 ```js
 import FrontendDeveloper ;
 
