@@ -30,3 +30,4 @@ class Links extends Frontenddeveloper {
 ![](http://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=blackgeneral11y&theme=aura_dark) 
 ![](http://github-profile-summary-cards.vercel.app/api/cards/stats?username=blackgeneral11y&theme=aura_dark) 
 ![](http://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=blackgeneral11y&theme=aura_dark&utcOffset=8) 
+[![GitHub Streak](https://github-readme-streak-stats.herokuapp.com?user=blackgeneral11y&theme=dark&hide_border=true)](https://git.io/streak-stats)
