@@ -1,5 +1,5 @@
 <p align="center">
-<h3 style="text-align:center">ADHAM</h3>
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&random=false&width=435&lines=ADHAM;+FRONTEND+DEVELOPER)](https://git.io/typing-svg)
   <img src="https://github.com/thompsonemerson/thompsonemerson/raw/master/cover-thompson.png" />
 </p>
 
@@ -31,3 +31,4 @@ class Links extends Frontenddeveloper {
 ![](http://github-profile-summary-cards.vercel.app/api/cards/stats?username=blackgeneral11y&theme=aura_dark) 
 ![](http://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=blackgeneral11y&theme=aura_dark&utcOffset=8) 
 [![GitHub Streak](https://github-readme-streak-stats.herokuapp.com?user=blackgeneral11y&theme=dark&hide_border=true)](https://git.io/streak-stats)
+
