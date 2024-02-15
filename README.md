@@ -25,3 +25,8 @@ class Links extends Frontenddeveloper {
 }
 ```
 ----
+![](http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=blackgeneral11y&theme=aura_dark) 
+![](http://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=blackgeneral11y&theme=aura_dark) 
+![](http://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=blackgeneral11y&theme=aura_dark) 
+![](http://github-profile-summary-cards.vercel.app/api/cards/stats?username=blackgeneral11y&theme=aura_dark) 
+![](http://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=blackgeneral11y&theme=aura_dark&utcOffset=8) 
