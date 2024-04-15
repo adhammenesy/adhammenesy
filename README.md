@@ -3,23 +3,22 @@
 </p>
 
 ```js
-import FrontendDeveloper ;
+import BackendDeveloper ;
 
 class Bio extends FrontendDeveloper {
   name  = 'Adham';
-  title = 'Frontend Developer';
+  title = 'Backend Developer';
   company = 'Soon';
   location = 'Egypt';
 }
 
 class Skills extends Frontenddeveloper {
-  languages  = ['JavaScript', 'css','Html'];
-  frameworks = 'soon';
+  languages  = ['JavaScript', 'nodejs'];
 }
 
 class Links extends Frontenddeveloper {
   linkedin = 'adham-menesy';
-  Discord = '7u9f';
+  Discord = '1_black';
   Whatsapp = +201091116276;
 }
 ```
