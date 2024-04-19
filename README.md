@@ -17,9 +17,7 @@ class Skills extends Frontenddeveloper {
 }
 
 class Links extends Frontenddeveloper {
-  linkedin = 'adham-menesy';
   Discord = '1_black';
-  Whatsapp = +201091116276;
 }
 ```
 ----
