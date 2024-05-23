@@ -3,21 +3,22 @@
 </p>
 
 ```js
-import BackendDeveloper ;
+import Backend From 'Adham';
 
-class Bio extends FrontendDeveloper {
+class Bio extends Backend {
   name  = 'Adham';
   title = 'Backend Developer';
   company = 'Soon';
   location = 'Egypt';
 }
 
-class Skills extends Frontenddeveloper {
+class Skills extends Backend {
   languages  = ['JavaScript', 'nodejs'];
+  libraryies = ['Discord.js', 'express']
 }
 
-class Links extends Frontenddeveloper {
-  Discord = '1_black';
+class Links extends Backend {
+  Discord = '5_6y';
 }
 ```
 ----
