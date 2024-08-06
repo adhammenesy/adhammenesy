@@ -7,8 +7,6 @@ import Backend From 'Adham';
 
 class Bio extends Backend {
   name  = 'Adham';
-  title = 'Backend Developer';
-  company = 'Soon';
   location = 'Egypt';
 }
 
