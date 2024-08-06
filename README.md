@@ -11,8 +11,8 @@ class Bio extends Backend {
 }
 
 class Skills extends Backend {
-  languages  = ['JavaScript', 'nodejs'];
-  libraryies = ['Discord.js', 'express']
+  languages  = ['JavaScript']; // Node Runtime
+  libraryies = ['Discord.js', 'express', 'socket.io']
 }
 
 class Links extends Backend {
