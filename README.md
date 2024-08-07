@@ -16,7 +16,7 @@ class Skills extends Backend {
 }
 
 class Links extends Backend {
-  Discord = '5_6y';
+  Discord = '4qf_';
 }
 ```
 ----
