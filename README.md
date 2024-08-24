@@ -40,13 +40,13 @@ I Speak Arabic, English
 <div align="center"> <h1 align="center"> 😎 Noteable Projects </h1> </div>
 
 <div align="center">
-  <a href="https://github.com/adhammenesy/dvo.js">
+  <a href="https://github.com/adhammenesy/dvo.js" targer="_blank">
   <img src="https://github-readme-stats.vercel.app/api/pin/?username=adhammenesy&repo=dvo.js&bg_color=30,020614,cfb360&title_color=a5a5a5&text_color=a5a5a5)](https://github.com/adhammenesy/dvo.js" alt="dvo.js" />
   </a>
-  <a href="https://github.com/adhammenesy/BootstrapProject">
+  <a href="https://github.com/adhammenesy/BootstrapProject" targer="_blank">
       <img src="https://github-readme-stats.vercel.app/api/pin/?username=adhammenesy&repo=BootstrapProject&bg_color=30,020614,cfb360&title_color=a5a5a5&text_color=a5a5a5)](https://github.com/adhammenesy/BootstrapProject" alt="firs bootstrap project" />
   </a>
-    <a href="https://github.com/adhammenesy/stock">
+    <a href="https://github.com/adhammenesy/stock" targer="_blank">
   <img src="https://github-readme-stats.vercel.app/api/pin/?username=adhammenesy&repo=stock&bg_color=30,020614,cfb360&title_color=a5a5a5&text_color=a5a5a5)](https://github.com/adhammenesy/stock" alt="Stock discord.js@14" />
   </a>
 </div>
