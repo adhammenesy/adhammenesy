@@ -43,8 +43,12 @@ I Speak Arabic, English
   <a href="https://github.com/adhammenesy/dvo.js">
   <img src="https://github-readme-stats.vercel.app/api/pin/?username=adhammenesy&repo=dvo.js&bg_color=30,020614,cfb360&title_color=a5a5a5&text_color=a5a5a5)](https://github.com/adhammenesy/dvo.js" alt="dvo.js" />
   </a>
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=adhammenesy&repo=BootstrapProject&bg_color=30,020614,cfb360&title_color=a5a5a5&text_color=a5a5a5)](https://github.com/adhammenesy/BootstrapProject" alt="firs bootstrap project" />
+  <a href="https://github.com/adhammenesy/BootstrapProject">
+      <img src="https://github-readme-stats.vercel.app/api/pin/?username=adhammenesy&repo=BootstrapProject&bg_color=30,020614,cfb360&title_color=a5a5a5&text_color=a5a5a5)](https://github.com/adhammenesy/BootstrapProject" alt="firs bootstrap project" />
+  </a>
+    <a href="https://github.com/adhammenesy/stock">
   <img src="https://github-readme-stats.vercel.app/api/pin/?username=adhammenesy&repo=stock&bg_color=30,020614,cfb360&title_color=a5a5a5&text_color=a5a5a5)](https://github.com/adhammenesy/stock" alt="Stock discord.js@14" />
+  </a>
 </div>
 
 <div align="center"> <h1 align="center"> 📊 GitHub Statistics </h1> </div>
