@@ -57,7 +57,7 @@
 <p align="center">
 
  <div align="center"  class="icons-social" style="margin-left: 10px;">
-        <a style="margin-left: 10px;" target="_blank" href="https://almasa.io/">
+        <a style="margin-left: 10px;" target="_blank" href="https://almasa.icu/">
 		<img src="https://cdn.iconscout.com/icon/free/png-256/web-earth-online-market-planet-search-secure-1-9563.png" width="40" height="40"></a>
 		<a style="margin-left: 5px;" target="_blank" href="https://discord.gg/Almasa">
 					<img src="https://img.icons8.com/color/48/000000/discord-logo.png" width="40" height="40"></a>
