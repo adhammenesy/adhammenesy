@@ -43,7 +43,7 @@
     <td><img src="https://img.icons8.com/color/48/000000/react-native.png" width=60 alt="react icon"></td>
     <td><img src="https://img.icons8.com/color/48/000000/html-5.png" width=60 alt="html icon"></td>
     <td><img src="https://img.icons8.com/color/48/000000/css3.png" width=60 alt="css icon"></td>
-    <td><img src="https://img.icons8.com/color/48/000000/ejs.png" width=60 alt="ejs icon"></td>
+    <td><img src="https://raw.githubusercontent.com/isocpp/logos/master/cpp_logo.png" width=60 alt="ejs icon"></td>
     <td><img src="https://img.icons8.com/color/48/000000/python.png" width=60 alt="python icon"></td>
     <td><img src="https://img.icons8.com/color/48/000000/discord-logo.png" width=60 alt="discrod.js icon"></td>
     <td><img src="https://img.icons8.com/color/48/000000/mongodb.png" width=60 alt="mongodb icon"></td>
