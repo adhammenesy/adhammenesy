@@ -18,6 +18,9 @@
 - Interested in **Scalable Architectures & Observability**
 - Tech I use: **MongoDb, Mysql**
 
+
+- [Tip Me](https://ko-fi.com/adhamdev)
+
 ---
 
 ## 🧰 Tech Stack
