@@ -30,6 +30,6 @@
 
 ---
 
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=adhammenesy&layout=compact&langs_count=8&theme=radical)](https://github.com/YOUR_USERNAME)
-[![GitHub Stats](https://github-readme-stats.vercel.app/api?username=adhammenesy&show_icons=true&theme=radical)](https://github.com/YOUR_USERNAME)
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=adhammenesy&layout=compact&langs_count=8&theme=radical)](https://github.com/adhammenesy)
+[![GitHub Stats](https://github-readme-stats.vercel.app/api?username=adhammenesy&show_icons=true&theme=radical)](https://github.com/adhammenesy)
 
