@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Black — Backend Developer Portfolio</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg: #0b1220;
+        --panel: #0f1724;
+        --muted: #9aa4b2;
+        --accent: #38bdf8;
+        --glow: rgba(56, 189, 248, 0.12);
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        background: linear-gradient(180deg, #05070a 0%, #071022 60%);
+        font-family: "Inter", system-ui, Segoe UI, Roboto, "Helvetica Neue",
+          Arial;
+        color: #e6eef8;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* Terminal boot */
+      #boot {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.6) 60%);
+        z-index: 60;
+        transition: opacity 600ms ease, transform 600ms ease;
+      }
+      #boot.hidden {
+        opacity: 0;
+        pointer-events: none;
+        transform: scale(0.99);
+      }
+
+      .term {
+        width: min(920px, 94%);
+        background: #010209;
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        border-radius: 12px;
+        box-shadow: 0 8px 40px rgba(2, 6, 23, 0.75),
+          0 0 40px rgba(56, 189, 248, 0.03) inset;
+        padding: 20px;
+        color: #a8e7ff;
+        font-family: "JetBrains Mono", monospace;
+      }
+      .term .dots {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+      .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 999px;
+        background: #2b2b2b;
+        box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.6);
+      }
+      .dot.red {
+        background: #ff5f56;
+      }
+      .dot.yellow {
+        background: #ffbd2e;
+      }
+      .dot.green {
+        background: #27c93f;
+      }
+
+      .log {
+        font-size: 13px;
+        line-height: 1.5;
+        max-height: 320px;
+        overflow: hidden;
+        white-space: pre-wrap;
+      }
+      .cursor {
+        display: inline-block;
+        width: 9px;
+        height: 18px;
+        background: var(--accent);
+        margin-left: 6px;
+        animation: blink 900ms steps(2) infinite;
+        vertical-align: middle;
+      }
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+
+      /* Main layout */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        backdrop-filter: blur(6px);
+        background: linear-gradient(
+          180deg,
+          rgba(8, 12, 20, 0.6),
+          rgba(8, 12, 20, 0.25)
+        );
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      }
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+
+      .brand {
+        font-weight: 700;
+        font-size: 18px;
+        color: #fff;
+        letter-spacing: 0.4px;
+      }
+      nav a {
+        color: var(--muted);
+        margin-left: 18px;
+        position: relative;
+        padding: 6px 0;
+      }
+      nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 2px;
+        width: 0;
+        background: var(--accent);
+        transition: width 260ms ease;
+      }
+      nav a:hover::after {
+        width: 100%;
+      }
+      nav a:hover {
+        color: #fff;
+      }
+
+      /* Panels */
+      .hero {
+        min-height: 78vh;
+        display: flex;
+        align-items: center;
+        gap: 32px;
+        padding: 40px 24px;
+      }
+      .hero-left {
+        flex: 1;
+      }
+      .hero-right {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .panel {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          rgba(255, 255, 255, 0.01)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        border-radius: 12px;
+        padding: 18px;
+        box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+      }
+
+      .title-h {
+        font-size: 28px;
+        font-weight: 700;
+        color: #e6f6ff;
+        margin-bottom: 8px;
+      }
+      .muted {
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      /* Projects as log-like cards (unique) */
+      .projects {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 16px;
+        margin-top: 18px;
+      }
+      .pj {
+        padding: 14px;
+        border-radius: 10px;
+        position: relative;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.012),
+          rgba(255, 255, 255, 0.01)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.025);
+        overflow: hidden;
+        transition: transform 260ms ease, box-shadow 260ms ease;
+      }
+      .pj:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 50px rgba(2, 6, 23, 0.6);
+      }
+      .pj .meta {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 8px;
+      }
+      .pj .name {
+        font-weight: 600;
+        font-size: 16px;
+        color: #fff;
+        margin-bottom: 6px;
+      }
+      .pj .desc {
+        font-size: 14px;
+        color: #cfeeff;
+        opacity: 0.9;
+        margin-bottom: 10px;
+      }
+
+      /* Skills neon bars */
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-top: 12px;
+      }
+      .skill {
+        padding: 12px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.015);
+        border: 1px solid rgba(255, 255, 255, 0.02);
+      }
+      .skill .bar {
+        height: 10px;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 999px;
+        margin-top: 8px;
+        overflow: hidden;
+      }
+      .skill .fill {
+        height: 100%;
+        width: 0%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--accent), #7dd3fc);
+        box-shadow: 0 6px 18px var(--glow);
+        transition: width 900ms cubic-bezier(0.2, 0.9, 0.2, 1);
+      }
+
+      /* Contact as API sample */
+      .api-sample {
+        font-family: "JetBrains Mono", monospace;
+        background: linear-gradient(
+          180deg,
+          rgba(8, 12, 20, 0.9),
+          rgba(8, 12, 20, 0.85)
+        );
+        border-radius: 10px;
+        padding: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        margin-top: 10px;
+      }
+      .endpoint {
+        color: #7dd3fc;
+      }
+      .payload {
+        color: #ffd580;
+      }
+      .response {
+        color: #a8e7ff;
+      }
+
+      /* Reveal animations */
+      .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: all 700ms cubic-bezier(0.2, 0.9, 0.2, 1);
+      }
+      .reveal.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      footer {
+        padding: 32px 0;
+        text-align: center;
+        color: var(--muted);
+        border-top: 1px solid rgba(255, 255, 255, 0.02);
+        margin-top: 32px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- BOOT SCREEN (terminal-like) -->
+    <div id="boot" aria-hidden="true">
+      <div class="term" role="region" aria-label="Boot terminal">
+        <div class="dots">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+
+        <div id="log" class="log" aria-live="polite"></div>
+        <div
+          style="
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+          "
+        >
+          <div style="font-size: 13px; color: var(--muted)">
+            Press
+            <kbd
+              style="
+                background: #08101a;
+                padding: 6px;
+                border-radius: 6px;
+                border: 1px solid rgba(255, 255, 255, 0.03);
+              "
+              >ENTER</kbd
+            >
+            to skip
+          </div>
+          <div style="flex: 1"></div>
+          <div class="cursor" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN PAGE -->
+    <header>
+      <div class="container flex items-center justify-between">
+        <div class="brand">
+          Black<span style="color: var(--accent)">Dev</span>
+        </div>
+        <nav>
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- HERO / intro folded like console -->
+      <section class="hero" style="padding-top: 42px">
+        <div class="hero-left reveal" id="heroPanel">
+          <div class="panel">
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+              "
+            >
+              <div>
+                <div class="title-h">Black — Backend Developer</div>
+                <div class="muted">
+                  I build scalable, secure APIs & server-side systems. <br>
+                  Working in <b><a href="https://almasa.network" target="_blank">Almasa Network</a></b> as COO
+                </div>
+              </div>
+              <div style="text-align: right">
+                <div
+                  style="
+                    font-family: 'JetBrains Mono';
+                    font-size: 13px;
+                    color: var(--muted);
+                  "
+                >
+                  uptime: <span id="uptime">—</span>
+                </div>
+                <div style="height: 8px"></div>
+                <div style="display: flex; gap: 8px; align-items: center">
+                  <!-- <button
+                    id="openCV"
+                    class="px-3 py-2 rounded-md bg-[#052233] text-sm border border-transparent hover:border-white/10"
+                  >
+                    Download CV
+                  </button> -->
+                  <a
+                    href="#contact"
+                    class="px-3 py-2 rounded-md bg-[#083449] text-sm hover:bg-[#0b5d78]"
+                    >Hire Me</a
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div
+              style="
+                margin-top: 14px;
+                display: flex;
+                gap: 12px;
+                flex-wrap: wrap;
+              "
+            >
+              <div
+                class="panel"
+                style="
+                  padding: 10px;
+                  background: transparent;
+                  border: 1px dashed rgba(255, 255, 255, 0.03);
+                "
+              >
+                <div
+                  style="
+                    font-family: 'JetBrains Mono';
+                    font-size: 12px;
+                    color: var(--muted);
+                  "
+                >
+                  Primary
+                </div>
+                <div style="font-weight: 600">Node.js / Express</div>
+              </div>
+              <div
+                class="panel"
+                style="
+                  padding: 10px;
+                  background: transparent;
+                  border: 1px dashed rgba(255, 255, 255, 0.03);
+                "
+              >
+                <div
+                  style="
+                    font-family: 'JetBrains Mono';
+                    font-size: 12px;
+                    color: var(--muted);
+                  "
+                >
+                  Database
+                </div>
+                <div style="font-weight: 600">MongoDB / PostgreSQL</div>
+              </div>
+              <div
+                class="panel"
+                style="
+                  padding: 10px;
+                  background: transparent;
+                  border: 1px dashed rgba(255, 255, 255, 0.03);
+                "
+              >
+                <div
+                  style="
+                    font-family: 'JetBrains Mono';
+                    font-size: 12px;
+                    color: var(--muted);
+                  "
+                >
+                  Infra
+                </div>
+                <div style="font-weight: 600">Docker / CI-CD</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: simulated live endpoint preview -->
+        <div class="hero-right reveal" id="livePanel">
+          <div class="panel" style="width: 100%; max-width: 560px">
+            <!-- كان 420px -->
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+              "
+            >
+              <div style="font-weight: 700">Live API Console</div>
+              <div class="muted" style="font-size: 13px">simulated</div>
+            </div>
+
+            <div style="margin-top: 12px">
+              <div class="api-sample">
+                <div style="margin-bottom: 8px">
+                  <span class="muted">Endpoint</span>
+                  <span class="endpoint">POST /api/v1/hire</span>
+                </div>
+                <div><span class="muted">Payload</span></div>
+                <pre style="margin: 6px 0" class="payload">
+{ "budget": 1200, "desc": "Build payment API" }</pre
+                >
+                <div><span class="muted">Response</span></div>
+                <pre style="margin: 6px 0" class="response">
+{ "status":"queued", "ticket":"#BH-2025" }</pre
+                >
+
+                <div style="display: flex; gap: 8px; margin-top: 8px">
+                  <button
+                    id="simulateBtn"
+                    class="px-3 py-2 rounded-md bg-[#063447] hover:bg-[#085a6a]"
+                  >
+                    Simulate Request
+                  </button>
+                  <button
+                    id="copyBtn"
+                    class="px-3 py-2 rounded-md bg-[#082033] hover:bg-[#0b3b4f]"
+                  >
+                    Copy Payload
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section id="projects" class="reveal" style="margin-top: 18px">
+        <div class="title-h">Projects</div>
+        <div class="muted">
+          Selected APIs & integrations — each card reveals key implementation
+          notes.
+        </div>
+
+        <div class="projects" id="projectsGrid" style="margin-top: 12px">
+          <!-- cards injected by JS -->
+        </div>
+      </section>
+
+      <!-- Skills -->
+      <section id="skills" class="reveal" style="margin-top: 22px">
+        <div class="title-h">Skills</div>
+        <div class="muted">Hover or scroll to animate capability bars.</div>
+        <div class="skills-grid" id="skillsGrid">
+          <!-- skill items injected by JS -->
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="reveal" style="margin-top: 22px">
+        <div class="title-h">Contact</div>
+        <div class="muted">
+          Want to work together? Send a simulated POST or email.
+        </div>
+
+        <div
+          style="display: flex; gap: 14px; margin-top: 12px; flex-wrap: wrap"
+        >
+          <div style="flex: 1; min-width: 280px">
+            <div class="panel">
+              <form id="contactForm" autocomplete="off">
+                <div style="display: flex; gap: 8px; flex-direction: column">
+                  <label class="muted">Your Name</label>
+                  <input
+                    name="name"
+                    required
+                    class="w-full rounded-md bg-transparent border border-white/6 px-3 py-2"
+                    placeholder="Client Name"
+                  />
+                  <label class="muted" style="margin-top: 8px"
+                    >Project Brief</label
+                  >
+                  <textarea
+                    name="brief"
+                    required
+                    class="w-full rounded-md bg-transparent border border-white/6 px-3 py-2"
+                    rows="4"
+                    placeholder="Describe the project..."
+                  ></textarea>
+                  <div style="display: flex; gap: 8px; margin-top: 10px">
+                    <button
+                      type="submit"
+                      class="px-3 py-2 rounded-md bg-[#05445e] hover:bg-[#076a88]"
+                    >
+                      Send (simulate)
+                    </button>
+                    <a
+                      href="mailto:adham.menesy.main@gmail.com"
+                      class="px-3 py-2 rounded-md bg-[#072233] hover:bg-[#0a3b4f]"
+                      >Or Email Me</a
+                    >
+                  </div>
+                </div>
+              </form>
+
+              <div
+                id="contactResult"
+                style="
+                  margin-top: 12px;
+                  font-family: 'JetBrains Mono';
+                  font-size: 13px;
+                  color: var(--muted);
+                "
+              ></div>
+            </div>
+          </div>
+
+          <div style="min-width: 300px; flex: 1">
+            <div class="panel">
+              <div class="muted">Quick links</div>
+              <div
+                style="
+                  display: flex;
+                  gap: 8px;
+                  margin-top: 8px;
+                  flex-wrap: wrap;
+                "
+              >
+                <a
+                  href="#"
+                  class="px-3 py-2 rounded-md bg-[#062432] hover:bg-[#08354a]"
+                  >GitHub</a
+                >
+                <a
+                  href="#"
+                  class="px-3 py-2 rounded-md bg-[#062432] hover:bg-[#08354a]"
+                  >Postman</a
+                >
+                <a
+                  href="#"
+                  class="px-3 py-2 rounded-md bg-[#062432] hover:bg-[#08354a]"
+                  >Swagger</a
+                >
+              </div>
+
+              <div style="margin-top: 12px">
+                <div class="muted">Contact snippet</div>
+                <pre
+                  style="
+                    margin-top: 6px;
+                    font-family: 'JetBrains Mono';
+                    font-size: 13px;
+                    background: rgba(255, 255, 255, 0.01);
+                    padding: 8px;
+                    border-radius: 8px;
+                  "
+                >
+POST /api/v1/hire
+Authorization: Bearer your_token_here
+{ "name":"Client", "email":"client@mail.com", "desc":"..." }
+              </pre
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        © <span id="year"></span> BlackDev — Backend APIs & Integrations
+      </footer>
+    </main>
+
+    <script>
+      // ---------- Data (customize these) ----------
+      const alias = "Black";
+      const projects = [
+        {
+          name: "Multi.dbx",
+          meta: "",
+          desc: "An npm package help developer for createa small database on small projects like: bots...",
+          tags: ["Node.js", "Ajv Json Schema"],
+          repo: "https://github.com/adhammenesy/multi.dbx",
+          docs: "https://multidbx.vercel.app/docs",
+          live: "https://www.npmjs.com/package/multi.dbx",
+        },
+        {
+          name: "Vps Manager",
+          meta: "",
+          desc: "connect with your vps and manage with small command prompt",
+          tags: ["Php", "Appache", "MySQL"],
+          repo: "https://github.com/adhammenesy/vps-manager",
+          docs: "https://github.com/adhammenesy/vps-manager",
+          live: "https://github.com/adhammenesy/vps-manager",
+        },
+      ];
+
+      const skills = [
+        { name: "Node.js", pct: 92 },
+        { name: "Express", pct: 90 },
+        { name: "MongoDB", pct: 86 },
+        { name: "Postgres", pct: 78 },
+        { name: "Docker", pct: 80 },
+        { name: "TypeScript", pct: 74 },
+        { name: "CI/CD", pct: 82 },
+        { name: "Testing", pct: 72 },
+      ];
+
+      // ---------- Boot terminal typing ----------
+      const bootLines = [
+        `booting BlackDev v1.0.3`,
+        `loading kernel modules: node-core, express, db-drivers`,
+        `initializing connections: mongodb://127.0.0.1:27017 ... [ok]`,
+        `connecting to message-broker ... [ok]`,
+        `starting background workers (6) ... [ok]`,
+        `mounting api routes: /api/v1/*`,
+        `synchronizing schemas ... [ok]`,
+        `security check: secrets NOT exposed`,
+        `system ready. rendering UI...`,
+      ];
+
+      const logEl = document.getElementById("log");
+      let bootIndex = 0;
+      let charIndex = 0;
+      let typingInterval = null;
+
+      function typeNextChar() {
+        if (bootIndex >= bootLines.length) {
+          clearInterval(typingInterval);
+          // small delay then hide
+          setTimeout(() => hideBoot(), 600);
+          return;
+        }
+        const line = bootLines[bootIndex];
+        if (charIndex <= line.length) {
+          logEl.innerText =
+            bootLines.slice(0, bootIndex).join("\n") +
+            (bootIndex ? "\n" : "") +
+            line.slice(0, charIndex) +
+            (charIndex % 2 ? "▌" : "");
+          charIndex++;
+        } else {
+          // finish this line properly
+          logEl.innerText = bootLines.slice(0, bootIndex + 1).join("\n");
+          bootIndex++;
+          charIndex = 0;
+        }
+      }
+
+      function startBoot() {
+        typingInterval = setInterval(typeNextChar, 36 + Math.random() * 26);
+      }
+
+      function hideBoot() {
+        const boot = document.getElementById("boot");
+        boot.classList.add("hidden");
+        setTimeout(() => (boot.style.display = "none"), 700);
+        revealAll();
+      }
+
+      // skip boot on Enter
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          clearInterval(typingInterval);
+          hideBoot();
+        }
+      });
+
+      // start boot on load
+      window.addEventListener("load", () => {
+        startBoot();
+        // set uptime mock
+        document.getElementById("uptime").innerText = "13 days 4h";
+        document.getElementById("year").innerText = new Date().getFullYear();
+      });
+
+      // ---------- Reveal & inject content ----------
+      const revealEls = document.querySelectorAll(".reveal");
+      function revealAll() {
+        // stagger reveal
+        revealEls.forEach((el, i) => {
+          setTimeout(() => el.classList.add("show"), 220 + i * 120);
+        });
+        // inject projects & skills
+        injectProjects();
+        injectSkills();
+        setupObservers();
+      }
+
+      // Projects injection
+      function injectProjects() {
+        const grid = document.getElementById("projectsGrid");
+        projects.forEach((p, idx) => {
+          const card = document.createElement("div");
+          card.className =
+            "pj panel relative flex flex-col gap-3 bg-gradient-to-br from-[#06141c] to-[#0a2532] border border-[#103648]/60 rounded-xl p-5 shadow-[0_0_12px_rgba(0,255,255,0.05)] hover:shadow-[0_0_25px_rgba(0,255,255,0.15)] hover:border-[#00d9ff80] transition-all duration-300 hover:-translate-y-1";
+
+          card.innerHTML = `
+      <div class="meta text-xs text-[#8baab8] tracking-wide uppercase">
+        [${p.meta}] • ${p.tags.join(" • ")}
+      </div>
+
+      <div class="name text-lg font-semibold text-[#e8faff] leading-snug">
+        ${p.name}
+      </div>
+
+      <div class="desc text-sm text-[#9eb8c6] leading-relaxed">
+        ${p.desc}
+      </div>
+
+      <div class="flex gap-2 flex-wrap mt-1">
+        <a href="${
+          p.repo
+        }" target="_blank" class="px-2 py-1 text-xs rounded-md bg-[#05232f] text-[#00d9ff] border border-[#00d9ff20] hover:bg-[#074b5a] hover:text-white transition-all duration-200">View Repo</a>
+        <a href="${
+          p.docs
+        }" target="_blank" class="px-2 py-1 text-xs rounded-md bg-[#05232f] text-[#00d9ff] border border-[#00d9ff20] hover:bg-[#074b5a] hover:text-white transition-all duration-200">Docs</a>
+        <a href="${
+          p.live
+        }" target="_blank" class="px-2 py-1 text-xs rounded-md bg-[#05232f] text-[#00d9ff] border border-[#00d9ff20] hover:bg-[#074b5a] hover:text-white transition-all duration-200">Live</a>
+      </div>
+
+      <div class="absolute inset-0 pointer-events-none rounded-xl bg-gradient-to-t from-[#00d9ff10] to-transparent opacity-0 hover:opacity-100 transition duration-500"></div>
+    `;
+
+          // Animation effect (log-like reveal)
+          card.style.opacity = "0";
+          card.style.transform = "translateY(22px)";
+          grid.appendChild(card);
+          setTimeout(() => {
+            card.style.transition = "all 500ms cubic-bezier(.2,.9,.2,1)";
+            card.style.opacity = "1";
+            card.style.transform = "translateY(0)";
+          }, 250 + idx * 100);
+        });
+      }
+
+      // Skills injection and hover fill
+      function injectSkills() {
+        const grid = document.getElementById("skillsGrid");
+        skills.forEach((s) => {
+          const el = document.createElement("div");
+          el.className = "skill";
+          el.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div style="font-weight:600">${s.name}</div>
+            <div style="font-family:'JetBrains Mono'; color:var(--muted)">${s.pct}%</div>
+          </div>
+          <div class="bar"><div class="fill" data-pct="${s.pct}"></div></div>
+        `;
+          grid.appendChild(el);
+        });
+      }
+
+      // Intersection observer: animate fills when visible
+      function setupObservers() {
+        const fills = document.querySelectorAll(".fill");
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const pct = entry.target.dataset.pct || 60;
+                entry.target.style.width = pct + "%";
+              }
+            });
+          },
+          { threshold: 0.4 }
+        );
+        fills.forEach((f) => observer.observe(f));
+
+        // also reveal panels on scroll
+        const revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) e.target.classList.add("show");
+            });
+          },
+          { threshold: 0.2 }
+        );
+        document
+          .querySelectorAll(".reveal")
+          .forEach((r) => revealObserver.observe(r));
+      }
+
+      // Contact form (simulate POST)
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", (ev) => {
+          ev.preventDefault();
+          const data = new FormData(ev.target);
+          const payload = { name: data.get("name"), brief: data.get("brief") };
+          const resEl = document.getElementById("contactResult");
+          resEl.innerText = "sending...";
+          setTimeout(() => {
+            resEl.innerText = `POST /api/v1/hire\n\n${JSON.stringify(
+              payload,
+              null,
+              2
+            )}\n\n=> 202 Accepted\nticket: #BH-${
+              Math.floor(Math.random() * 9000) + 1000
+            }`;
+          }, 700);
+        });
+
+      // Simulate API request button
+      document.getElementById("simulateBtn").addEventListener("click", () => {
+        const resp = document.querySelector(".response");
+        resp.innerText =
+          '{ "status":"processing", "ticket":"#BH-' +
+          (Math.floor(Math.random() * 9000) + 1000) +
+          '" }';
+        resp.style.transition = "all 260ms ease";
+      });
+      // Copy payload
+      document.getElementById("copyBtn").addEventListener("click", () => {
+        const payload = document.querySelector(".payload").innerText;
+        navigator.clipboard
+          ?.writeText(payload)
+          .then(() => {
+            alert("Payload copied to clipboard");
+          })
+          .catch(() => alert("Copy failed"));
+      });
+
+      // CV download fake
+      document.getElementById("openCV").addEventListener("click", () => {
+        const blob = new Blob(
+          [`CV — ${alias}\n\nSkills:\n- Backend\n- APIs\n`],
+          { type: "text/plain" }
+        );
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${alias}-CV.txt`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      });
+
+      // Smooth reveal on nav clicks (already css smooth, but ensure offset)
+      document.querySelectorAll("nav a").forEach((a) => {
+        a.addEventListener("click", (e) => {
+          e.preventDefault();
+          const id = a.getAttribute("href").slice(1);
+          const el = document.getElementById(id);
+          if (el)
+            window.scrollTo({
+              top: el.getBoundingClientRect().top + window.scrollY - 80,
+              behavior: "smooth",
+            });
+        });
+      });
+    </script>
+  </body>
+</html>
