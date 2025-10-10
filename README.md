@@ -19,7 +19,7 @@
 - Tech I use: **MongoDb, Mysql**
 
 
-- [Tip Me](https://ko-fi.com/adhamdev)
+- [Portfolio](https://adhammenesy.github.io/adhammenesy/)   
 
 ---
 
