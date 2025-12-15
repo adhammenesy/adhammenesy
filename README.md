@@ -19,13 +19,17 @@
 - Tech I use: **MongoDb, Mysql**
 
 
-- [Portfolio](https://adhammenesy.github.io/adhammenesy/)   
 
 ---
 
 ## 🧰 Tech Stack
 <p>
-  <img src="https://skillicons.dev/icons?i=nodejs,ts,js,express,php,cpp,postman,npm,mongodb,mysql,sqlite,nginx,git,github,githubactions" />
+  <img src="https://skillicons.dev/icons?i=nodejs,ts,js,express,php,cpp,postman,npm,mongodb,mysql,sqlite," />
+</p>
+
+## 👩‍💻 DevOps 
+<p>
+  <img src="https://skillicons.dev/icons?i=git,github,githubactions,linux,aws,cloudflare" />
 </p>
 
 ---
