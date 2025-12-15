@@ -29,7 +29,8 @@
 </p>
 
 ---
-
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=adhammenesy&layout=compact&langs_count=8&theme=radical)](https://github.com/adhammenesy)
-[![GitHub Stats](https://github-readme-stats.vercel.app/api?username=adhammenesy&show_icons=true&theme=radical)](https://github.com/adhammenesy)
+<div align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=adhammenesy&show_icons=true&theme=tokyonight&hide_border=true&count_private=true" height="170"/>
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=adhammenesy&layout=compact&theme=tokyonight&hide_border=true" height="170"/>
+</div>
 
