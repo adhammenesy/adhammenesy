@@ -24,7 +24,7 @@
 
 ## 🧰 Tech Stack
 <p>
-  <img src="https://skillicons.dev/icons?i=nodejs,ts,js,express,php,cpp,postman,npm,mongodb,mysql,sqlite," />
+  <img src="https://skillicons.dev/icons?i=nodejs,bun,ts,js,express,php,cpp,postman,npm,mongodb,mysql,sqlite,redis" />
 </p>
 
 ## 👩‍💻 DevOps 
