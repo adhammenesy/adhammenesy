@@ -29,7 +29,7 @@
 
 ## 👩‍💻 DevOps 
 <p>
-  <img src="https://skillicons.dev/icons?i=git,github,githubactions,linux,aws,cloudflare,network,it" />
+  <img src="https://skillicons.dev/icons?i=git,github,githubactions,linux,aws,cloudflare,InformationTechnology" />
 </p>
 
 ---
