@@ -34,7 +34,6 @@
 
 ---
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=adhammenesy&show_icons=true&theme=tokyonight&hide_border=true&count_private=true" height="170"/>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=adhammenesy&layout=compact&theme=tokyonight&hide_border=true" height="170"/>
+  <a href="https://www.buymeacoffee.com/adhamdev" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 </div>
 
